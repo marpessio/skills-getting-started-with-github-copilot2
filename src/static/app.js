@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ? `<div class="participants">
               <h5>Current Participants:</h5>
               <ul>
-                ${details.participants.map(email => `<li>${email}</li>`).join('')}
+                ${details.participants.map(email => `<li>${email} <button class='delete-btn' data-email='${email}'>🗑️</button></li>`).join('')}
               </ul>
             </div>`
           : '<p class="no-participants">No participants yet</p>';
@@ -72,6 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
         signupForm.reset();
+        // Refresh activities list to show the new participant
+        fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
